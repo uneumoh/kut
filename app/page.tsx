@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
         <p className="text-2xl text-[#7c4b8b]">Untamed Elegance</p>
         <div className="w-3/4 text-center">
           <p className="text-wrap">
-            Discover the industry's most sought-after raw and virgin hair
+            Discover the industry&apos;s most sought-after raw and virgin hair
             extensions, meticulously sourced and crafted for the discerning
             professional.
           </p>
@@ -51,34 +51,50 @@ export default function Home() {
       </div>
       <div className="flex h-[80vh] w-screen bg-[#fffac6]">
         <div className="flex flex-1 flex-row gap-5 p-10">
-          <div className="flex flex-1 flex-col">
-            <p className="text-2xl font-bold">Why KUT</p>
-            <h1 className="text-6xl font-semibold">
-              Elevating the Art of Hair.
-            </h1>
+          <div className="flex flex-1 flex-col items-center justify-center gap-5">
+            <div className="w-full">
+              <p className="text-2xl font-bold">Why KUT</p>
+            </div>
+            <div className="w-full">
+              <h1 className="text-6xl font-semibold">
+                Elevating the Art of Hair.
+              </h1>
+            </div>
             <p className="text-wrap">
               We bypass middlemen to source directly from temples, ensuring
               every bundle meets our obsessive standards for cuticle alignment,
               density, and longevity.
             </p>
             <div className="flex flex-row">
-              <div className="flex flex-1"></div>
-              <div className="flex flex-1"></div>
+              <div className="flex flex-1">
+                <div className="flex flex-col gap-2">
+                  <p className="text-xl font-bold">Raw Authenticity</p>
+                  <p className="text-wrap">
+                    Unprocessed, pure cuticles intact for styling versatility.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-1">
+                <div className="flex flex-col gap-2">
+                  <p className="text-xl font-bold">Priority Dispatch</p>
+                  <p className="text-wrap">
+                    Secure, expedited shipping directly to your doorstep.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className=""></div>
+            <div className="flex w-full flex-col gap-2">
+              <p className="text-xl font-bold">Concierge Support</p>
+              <p className="text-wrap">
+                Secure, expedited shipping directly to your salon.
+              </p>
+            </div>
           </div>
           <div className="flex flex-1">Images go here</div>
         </div>
       </div>
 
-      <div className="flex h-[20vh] flex-row">
-        <div className="flex flex-3">
-          <div className="flex flex-col"></div>
-          <div className="flex flex-col"></div>
-          <div className="flex flex-col"></div>
-        </div>
-        <div className="flex flex-1"></div>
-      </div>
+      <Footer />
     </div>
   );
 }
