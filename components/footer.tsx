@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <div className="flex h-[20vh] flex-col">
-      <div className="flex h-[15vh] flex-row">
+    <div className="flex h-[20vh] w-full flex-col bg-[#E2E3E1] px-[5%]">
+      <div className="flex h-[15vh] flex-row items-center">
         <div className="flex flex-3">
           <div className="flex flex-1 flex-col">
             <h2>KUT</h2>

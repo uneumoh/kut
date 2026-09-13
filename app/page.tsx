@@ -1,26 +1,10 @@
 import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 export default function Home() {
   return (
     <div className="flex w-screen flex-col">
-      <div className="flex h-[10vh] w-screen flex-row bg-[#E2E3E1]">
-        <div className="flex flex-1 flex-row"></div>
-        <div className="flex flex-1 flex-row items-center justify-center gap-5">
-          <button className="flex-1 text-xl hover:cursor-pointer hover:text-[#7c4b8b]">
-            Home
-          </button>
-          <button className="flex-1 text-xl hover:cursor-pointer hover:text-[#7c4b8b]">
-            Shop Bundles
-          </button>
-          <button className="flex-1 text-xl hover:cursor-pointer hover:text-[#7c4b8b]">
-            My Orders
-          </button>
-          <button className="flex-1 text-xl hover:cursor-pointer hover:text-[#7c4b8b]">
-            Admin Portal
-          </button>
-        </div>
-        <div className="flex flex-1 flex-row">{/* Cart Image */}</div>
-      </div>
+      <Header />
       <div className="flex h-[90vh] flex-col items-center justify-center">
         <p className="text-3xl font-bold">Your New Hair Obsession</p>
         <p className="text-2xl text-[#7c4b8b]">Untamed Elegance</p>
@@ -93,7 +77,6 @@ export default function Home() {
           <div className="flex flex-1">Images go here</div>
         </div>
       </div>
-
       <Footer />
     </div>
   );
