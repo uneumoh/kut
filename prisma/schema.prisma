@@ -18,33 +18,38 @@ model User {
 }
 
 model Product {
-  id      String  @id @default(cuid())
-  name    String
-  length  Int
-  texture String
-  color   String
-  price   Decimal @db.Decimal(10, 2)
-  stock   Int     @default(0)
+  id        String   @id @default(cuid())
+  name      String
+  length    Int
+  texture   String
+  color     String
+  price     Decimal  @db.Decimal(10, 2)
+  stock     Int      @default(0)
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   orderItems OrderItem[]
 }
 
 model Order {
-  id         String      @id @default(cuid())
-  status     OrderStatus @default(PENDING_PAYMENT)
+  id        String @id @default(cuid())
+  reference String @unique
+
+  status OrderStatus @default(PENDING_PAYMENT)
 
   customerId String?
-  customer   User?       @relation(fields: [customerId], references: [id])
+  customer   User? @relation(fields: [customerId], references: [id])
 
   customerName  String
   customerPhone String
   address       String
 
-  total      Decimal     @db.Decimal(10, 2)
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  total     Decimal  @db.Decimal(10, 2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  items      OrderItem[]
+  items OrderItem[]
 
   @@index([customerPhone])
 }
