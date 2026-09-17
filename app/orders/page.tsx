@@ -1,4 +1,4 @@
-import { createOrder } from "@/app/actions/order";
+import { createOrder } from "@/actions/order";
 
 export default function TestOrderPage() {
   return (

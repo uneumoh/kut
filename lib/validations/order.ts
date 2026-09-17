@@ -3,7 +3,10 @@ import { z } from "zod";
 
 export const createOrderSchema = z.object({
   customerName: z.string().trim().min(2, "Name is required"),
-  customerPhone: z.string().trim().min(7, "Valid phone number is required"),
+  customerPhone: z
+    .string()
+    .trim()
+    .regex(/^\+?\d{10,14}$/, "Enter a valid phone number"),
   address: z.string().trim().min(5, "Address is required"),
 
   items: z

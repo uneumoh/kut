@@ -13,21 +13,42 @@ export async function getProduct(id: string) {
   return prisma.product.findUnique({ where: { id } });
 }
 
-export async function createProduct(input: unknown) {
-  const data = productSchema.parse(input);
-  const product = await prisma.product.create({ data });
+export async function createProduct(formData: FormData) {
+  const raw = Object.fromEntries(formData.entries());
+  const data = productSchema.parse(raw);
+
+  const existingProduct = await prisma.product.findFirst({
+    where: {
+      name: data.name,
+      length: data.length,
+      texture: data.texture,
+      color: data.color,
+    },
+  });
+
+  if (existingProduct) {
+    await prisma.product.update({
+      where: { id: existingProduct.id },
+      data: {
+        stock: {
+          increment: data.stock,
+        },
+      },
+    });
+  } else {
+    await prisma.product.create({ data });
+  }
+
   revalidatePath("/admin/products");
-  return product;
 }
 
 export async function updateProduct(id: string, input: unknown) {
   const data = productSchema.partial().parse(input);
-  const product = await prisma.product.update({ where: { id }, data });
+  await prisma.product.update({ where: { id }, data });
   revalidatePath("/admin/products");
-  return product;
 }
 
-export async function deleteProduct(id: string) {
+export async function deleteProduct(id: string, _formData: FormData) {
   await prisma.product.delete({ where: { id } });
   revalidatePath("/admin/products");
 }
