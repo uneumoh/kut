@@ -1,7 +1,7 @@
-import { listProducts, createProduct, deleteProduct } from "@/actions/product";
+import { getProducts, createProduct, deleteProduct } from "@/actions/product";
 
 export default async function AdminProductsPage() {
-  const products = await listProducts();
+  const products = await getProducts();
 
   return (
     <div>

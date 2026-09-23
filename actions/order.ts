@@ -1,7 +1,6 @@
 // actions/orders.ts
 "use server";
 
-import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { createOrderSchema } from "@/lib/validations/order";
@@ -137,8 +136,6 @@ export async function markOrderPaid(id: string, _formData: FormData) {
   }
 
   revalidatePath("/admin/orders");
-
-  return { success: true };
 }
 
 export async function markOrderFulfilled(id: string, _formData: FormData) {
@@ -156,7 +153,6 @@ export async function markOrderFulfilled(id: string, _formData: FormData) {
   }
 
   revalidatePath("/admin/orders");
-  return { success: true };
 }
 
 export async function markOrderCancelled(id: string, _formData: FormData) {
@@ -175,7 +171,6 @@ export async function markOrderCancelled(id: string, _formData: FormData) {
     throw new Error("Order not found or is not in a cancellable state");
   }
   revalidatePath("/admin/orders");
-  return { success: true };
 }
 
 export async function getOrderById(id: string) {
@@ -216,7 +211,7 @@ export async function getOrderByReference(reference: string) {
   return order;
 }
 
-export async function listOrders() {
+export async function getOrders() {
   const orders = await prisma.order.findMany({
     orderBy: {
       createdAt: "desc",
@@ -225,7 +220,7 @@ export async function listOrders() {
   return orders;
 }
 
-export async function listPendingOrder() {
+export async function getPendingOrder() {
   const orders = await prisma.order.findMany({
     where: {
       status: "PENDING_PAYMENT",
@@ -235,4 +230,20 @@ export async function listPendingOrder() {
     throw new Error("No pending orders found");
   }
   return orders;
+}
+
+export async function cancelStaleOrders(olderThanHours = 24) {
+  // await requireAdmin() — uncomment once auth is wired in
+
+  const cutoff = new Date(Date.now() - olderThanHours * 60 * 60 * 1000);
+
+  await prisma.order.updateMany({
+    where: {
+      status: "PENDING_PAYMENT",
+      createdAt: { lt: cutoff },
+    },
+    data: { status: "CANCELLED" },
+  });
+
+  revalidatePath("/admin/orders");
 }

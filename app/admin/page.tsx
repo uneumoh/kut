@@ -1,15 +1,9 @@
-import Footer from "@/components/footer";
-import Header from "@/components/header";
+import AdminSidebar from "@/components/admin-sidebar";
 
 const Admin = () => {
   return (
     <div className="flex min-h-screen w-screen flex-row">
-      <aside className="flex flex-3 flex-col">
-        <div className="flex w-full justify-center">KUT</div>
-        <button>Inventory</button>
-        <button>Orders</button>
-        <button>Analytics</button>
-      </aside>
+      <AdminSidebar />
       <main className="flex flex-7 flex-col px-[5%]">
         <div className="flex h-[5vh] flex-row items-center">
           <p>Admin Portal</p>
