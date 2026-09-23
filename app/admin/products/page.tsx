@@ -42,7 +42,7 @@ export default async function AdminProductsPage() {
           {products.map((p) => (
             <tr key={p.id}>
               <td>{p.name}</td>
-              <td>{p.length}</td>
+              <td>{p.length}&quot</td>
               <td>₦{p.price.toString()}</td>
               <td>{p.stock}</td>
               <td>
